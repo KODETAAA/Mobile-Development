@@ -1,47 +1,23 @@
 package com.example.alonzomobileapp;
 
-import android.widget.Toast;
-
-public class TwoDayPackage extends Package {
-    private double fee = 150.50;
-
-    public TwoDayPackage(String sname, String saddress, String rname, String raddress, double weight, double cost) {
-        super(sname, saddress, rname, raddress, weight, cost);
+public class TwoDayPackage extends Package{
+    private double flatFee = 90;
+    public TwoDayPackage(String senderAdd,String receiverAdd, double weight, double cost){
+        super(senderAdd, receiverAdd, weight,cost);
     }
-
-    public TwoDayPackage(String sname, String saddress, String rname, String raddress, double weight,double cost,double fee) {
-        super(sname, saddress, rname, raddress, weight, cost);
-        this.fee = fee;
+    public TwoDayPackage(String senderAdd,String receiverAdd, double weight, double cost, double flatFee){
+        super(senderAdd, receiverAdd, weight,cost);
+        this.flatFee = flatFee;
     }
-
-    public void setFee(int fee) {
-        this.fee = fee;
+    public void setFlatFee(double flatFee){
+        this.flatFee = flatFee;
     }
-
-    public double getFee() {
-        return fee;
+    public double getFlatFee(){
+        return flatFee;
     }
-
-    public  double calculateCost() {
-        double fee = getWeight() * getCost() + getFee();
-        return fee;
-    }
-
     @Override
-    public void display() {
-        System.out.println("Sender Name:" + getSenderN());
-        System.out.println("Sender Address:" + getSenderA());
-        System.out.println("Receiver Name:" + getReceiverN());
-        System.out.println("Receiver Address:" + getReceiverA());
-        System.out.println("Weight:" +getWeight());
-        System.out.println("Cost:" + getCost());
+    public double calculateCost(){
+        double fee = flatFee + (getWeight() * getCost());
+        return fee;
     }
-
-    public String toString(){
-        return "Type of Package: TwoDay Package" +"\n"+ "Sender Name:" + getSenderN() +"\n"+ "Sender Address:" + getSenderA() +"\n"+ "Receiver Name:" + getReceiverN() +"\n"+ "Receiver Address:" + getReceiverA() +"\n"+ "Weight:" +getWeight() +"\n"+ "Cost:" + getCost() +"\n"+"Total:" + this.calculateCost();
-
-    }
-
-
-
 }
